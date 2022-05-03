@@ -1,0 +1,3 @@
+[submodule "src/main/java/org/usfirst/frc/team2077/common"]
+	path = src/main/java/org/usfirst/frc/team2077/common
+	url = https://github.com/kettlemorainerc/common-robot-classes.git
