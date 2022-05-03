@@ -5,9 +5,11 @@ import edu.wpi.first.wpilibj2.command.*;
 
 public class Robot extends TimedRobot {
     private RobotHardware hardware;
+    private DriveStation driveStation;
 
     @Override public void robotInit() {
         hardware = new RobotHardware();
+        driveStation = new DriveStation(hardware);
     }
 
     @Override public void robotPeriodic() {
