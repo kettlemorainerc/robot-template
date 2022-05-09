@@ -1,6 +1,24 @@
 # Robot template
 
 ---
+This is a basic template for team 2077 bots. There's a few important files to know about
+as you star editing the code for a new robot. 
+
+- [DriveStation](src/main/java/org/usfirst/frc/team2077/DriveStation.java)
+  - It's the location where we setup the robot for user control.
+    Typically, you set up controllers, their button bindings, and any default
+    commands for subsystems.
+- The [command](src/main/java/org/usfirst/frc/team2077/commands) package
+  - You will add new commands to this package that will then be used in
+    autonomousInit/DriveStation
+- [RobotHardware](src/main/java/org/usfirst/frc/team2077/RobotHardware.java)
+  - This is the location where subsystem will be added and where you can see examples of
+    various subsystem instances
+- [Robot](src/main/java/org/usfirst/frc/team2077/Robot.java)
+    - Normally you'll only need to really touch the autonomousInit method in order
+      to set up and execute a command in autonomous mode.
+
+
 ## Getting Started
 
 - Create a new, blank, uninitialized repository

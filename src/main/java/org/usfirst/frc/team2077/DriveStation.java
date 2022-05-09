@@ -21,16 +21,23 @@ public class DriveStation {
     private final Joystick technicalStick;
 
     public DriveStation(RobotHardware hardware) {
+        /** Set the driver's control method this NEEDS to be a {@link DriveStick} implementation */
 //        driveStick = getFlysky();
 //        driveStick = getJoystick();
         driveStick = getXbox();
 
+        /** Set the technical control method. This can be any {@link Joystick} implementation */
 //        technicalStick = getTechnicalJoystick();
         technicalStick = getNumpad();
 
         bind(hardware);
     }
 
+    /**
+     * This method binds any subsystem's default command and bind commands to a user's chosen
+     * control method.
+     * @param hardware
+     */
     public void bind(RobotHardware hardware) {
         hardware.getPosition().setDefaultCommand(new CardinalMovement(hardware, driveStick));
         hardware.getHeading().setDefaultCommand(new RotationMovement(hardware, driveStick));
@@ -39,31 +46,29 @@ public class DriveStation {
         bindTechnicalControl(hardware, technicalStick);
     }
 
-    /**
-     * Bind related commands/controls here
-     */
+    /** Bind primary/driver related commands/controls here */
     private static void bindDriverControl(RobotHardware hardware, DriveStick primary) {
     }
 
-    /**
-     * Bind secondary/techincal driver commands/controls here
-     */
+    /** Bind secondary/technical driver commands/controls here */
     private void bindTechnicalControl(RobotHardware hardware, Joystick secondary) {
     }
 
-    /** Normal (brighter/silver) joystick that supports rotation */
+    /** Normal (silver/brighter) joystick that supports rotation */
     private static DriveJoystick getJoystick() {
-        return new DriveJoystick(DRIVE_JOYSTICK_PORT).setDriveSensitivity(.15, 5).setRotationSensitivity(.1, 1);
+        return new DriveJoystick(DRIVE_JOYSTICK_PORT).setDriveSensitivity(.15, 5)
+                                                     .setRotationSensitivity(.1, 1);
     }
 
     /** Flysky Drone Controller */
     private static DriveJoystick getFlysky() {
         return new DriveJoystick(FLYSKY_PORT, 4).setDriveSensitivity(.3, 1)
-                                   .setRotationSensitivity(.05, 2.5);
+                                                .setRotationSensitivity(.05, 2.5);
     }
 
     private static DriveXboxController getXbox(){
-        return new DriveXboxController(DRIVE_XBOX_PORT).setDriveSensitivity(.15,1).setRotationSensitivity(.05,1.5);
+        return new DriveXboxController(DRIVE_XBOX_PORT).setDriveSensitivity(.15,1)
+                                                       .setRotationSensitivity(.05,1.5);
     }
 
     /** Currently the darker joystick that doesn't support rotation */
