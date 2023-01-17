@@ -8,12 +8,20 @@ package org.usfirst.frc.team2077;
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj2.command.button.*;
 import org.usfirst.frc.team2077.common.*;
-import org.usfirst.frc.team2077.common.commands.*;
+import org.usfirst.frc.team2077.common.command.*;
 
+/**
+ * This class is intended to be the center point of defining actions that can be utilized during teleop segments of
+ * control. This is where we should define what USB port joysticks should be registered as in `FRC Driver Station`'s usb
+ * menu. As well as define what buttons on primary/technical driver's controllers should do what.
+ * */
 public class DriveStation {
+    // Common controller port numbers
+    // The joystick that supported rotation
     private static final int DRIVE_JOYSTICK_PORT = 0;
     private static final int DRIVE_XBOX_PORT = 1;
-    private static final int TECHNICAL_JOYSTICK_PORT = 1;
+    // The joystick that does not support rotation
+    private static final int TECHNICAL_JOYSTICK_PORT = 4;
     private static final int FLYSKY_PORT = 2;
     private static final int NUMPAD_PORT = 5;
 
@@ -21,7 +29,7 @@ public class DriveStation {
     private final Joystick technicalStick;
 
     public DriveStation(RobotHardware hardware) {
-        /** Set the driver's control method this NEEDS to be a {@link DriveStick} implementation */
+        /** Set the driver's control method this MUST be a {@link DriveStick} implementation */
 //        driveStick = getFlysky();
 //        driveStick = getJoystick();
         driveStick = getXbox();
@@ -36,9 +44,9 @@ public class DriveStation {
     /**
      * This method binds any subsystem's default command and bind commands to a user's chosen
      * control method.
-     * @param hardware
      */
     public void bind(RobotHardware hardware) {
+        // Setup basic robot movement commands
         hardware.getPosition().setDefaultCommand(new CardinalMovement(hardware, driveStick));
         hardware.getHeading().setDefaultCommand(new RotationMovement(hardware, driveStick));
 
@@ -46,11 +54,11 @@ public class DriveStation {
         bindTechnicalControl(hardware, technicalStick);
     }
 
-    /** Bind primary/driver related commands/controls here */
+    /** Bind primary driver's button commands here */
     private static void bindDriverControl(RobotHardware hardware, DriveStick primary) {
     }
 
-    /** Bind secondary/technical driver commands/controls here */
+    /** Bind technical driver button commands here */
     private void bindTechnicalControl(RobotHardware hardware, Joystick secondary) {
     }
 

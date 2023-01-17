@@ -8,7 +8,7 @@ as you star editing the code for a new robot.
   - It's the location where we setup the robot for user control.
     Typically, you set up controllers, their button bindings, and any default
     commands for subsystems.
-- The [command](src/main/java/org/usfirst/frc/team2077/commands) package
+- The [command](src/main/java/org/usfirst/frc/team2077/command) package
   - You will add new commands to this package that will then be used in
     autonomousInit/DriveStation
 - [RobotHardware](src/main/java/org/usfirst/frc/team2077/RobotHardware.java)
@@ -22,8 +22,10 @@ as you star editing the code for a new robot.
 ## Getting Started
 
 - Create a new, blank, uninitialized repository
-  - The git URL will be identified as `<target repo>`
-  - It's name will be identified as `<target dir>`
+  - The git URL for the new robot repository will be identified as `<target repo>`
+    - It'll most likely resemble `https://github.com/kettlemorainerc/robot-template.git`, but with only `robot-template`
+      changed to something else
+  - The folder of the new robot repo name will be identified as `<target dir>`
 - Clone the repository
   - Either using terminal/cmd commands
     - ```shell
