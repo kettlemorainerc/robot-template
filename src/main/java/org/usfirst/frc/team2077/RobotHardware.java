@@ -1,51 +1,46 @@
 package org.usfirst.frc.team2077;
 
-import com.kauailabs.navx.frc.*;
-import edu.wpi.first.wpilibj2.command.*;
-import org.usfirst.frc.team2077.common.WheelPosition;
-import org.usfirst.frc.team2077.common.drivetrain.*;
-import org.usfirst.frc.team2077.common.sensor.AngleSensor;
+import org.usfirst.frc.team2077.common.*;
 
+import java.util.EnumMap;
+/*
+You should replace "DRIVE_MODULE" with the type of modules your chassis uses.
+Ex. SparkNeoDriveModule, SwerveModule, etc.
+and replace "CHASSIS_TYPE" with the type of chassis you're using MecanumChassis, SwerveChassis, etc.
+*/
 
 /**
- * To prepare this class for actual use you'll need to replace all instances of `/*DRIVE_MODULE&#42;/`
- * with your chassis' wheel module type.
- * As well as replacing all instances of `/*CHASSIS_TYPE&#42;/` with the robot's actual chassis type.
- * <br /><br />
- * In the case of something like a mecanum driven chassis you might replace `/*DRIVE_MODULE&#42;/` with
- * {@link org.usfirst.frc.team2077.common.subsystem.CANLineSubsystem.SparkNeo CANLineSubsystem.SparkNeo}
- * and `/*CHASSIS_TYPE&#42;/` with {@link MecanumChassis}
+ * This is intended to be a spot for the definition and retrieval of all robot hardware.
  * */
-public class RobotHardware implements org.usfirst.frc.team2077.common.RobotHardware</*DRIVE_MODULE*/, /*CHASSIS_TYPE*/> {
-    private final Subsystem HEADING = new Subsystem() {};
-    private final Subsystem POSITION = new Subsystem() {};
-    private final /*CHASSIS_TYPE*/ CHASSIS;
+public class RobotHardware implements HardwareRequirements<DRIVE_MODULE, CHASSIS_TYPE> {
+    private final CHASSIS_TYPE chassis;
+    private final Map<WheelPosition, DRIVE_MODULE> wheels = new EnumMap<>(WheelPosition.class);
 
     public RobotHardware() {
-        CHASSIS = new /*CHASSIS_TYPE*/(this);
+        super();
+
+        for(WheelPosition p : WheelPosition.values()) {
+            wheels.put(p, makeWheel(p));
+        }
+
+        chassis = new ChassisType(this);
     }
 
-    @Override public Subsystem getHeading() {
-        return HEADING;
+    private DRIVE_MODULE makeWheel(WheelPosition position) {
+        switch(position) {
+            case FRONT_LEFT -> new DRIVE_MODULE();
+            case FRONT_RIGHT -> new DRIVE_MODULE();
+            case BACK_LEFT -> new DRIVE_MODULE();
+            case BACK_RIGHT -> new DRIVE_MODULE();
+        }
+        throw new IllegalArgumentException("Unsupported Wheel position: " + position);
     }
 
-    @Override public Subsystem getPosition() {
-        return POSITION;
+    @Override public CHASSIS_TYPE getChassis() {
+        return chassis;
     }
 
-    @Override public AbstractChassis</*DRIVE_MODULE*/> getChassis() {
-        return CHASSIS;
-    }
-
-    @Override public AHRS getNavX() {
-        return null;
-    }
-
-    @Override public AngleSensor getAngleSensor() {
-        return null;
-    }
-
-    @Override public /*DRIVE_MODULE*/ getWheel(WheelPosition position) {
-        return null;
+    @Override public DRIVE_MODULE getWheel(WheelPosition pos) {
+        return wheels.get(pos);
     }
 }

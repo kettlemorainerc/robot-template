@@ -7,8 +7,10 @@ package org.usfirst.frc.team2077;
 
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj2.command.button.*;
-import org.usfirst.frc.team2077.common.*;
 import org.usfirst.frc.team2077.common.command.*;
+import org.usfirst.frc.team2077.common.control.DriveJoystick;
+import org.usfirst.frc.team2077.common.control.DriveStick;
+import org.usfirst.frc.team2077.common.control.DriveXboxController;
 
 /**
  * This class is intended to be the center point of defining actions that can be utilized during teleop segments of
@@ -17,12 +19,13 @@ import org.usfirst.frc.team2077.common.command.*;
  * */
 public class DriveStation {
     // Common controller port numbers
-    // The joystick that supported rotation
+    // Joysticks that support rotation
     private static final int DRIVE_JOYSTICK_PORT = 0;
     private static final int DRIVE_XBOX_PORT = 1;
-    // The joystick that does not support rotation
-    private static final int TECHNICAL_JOYSTICK_PORT = 4;
     private static final int FLYSKY_PORT = 2;
+
+    // Joysticks that do not support rotation
+    private static final int TECHNICAL_JOYSTICK_PORT = 4;
     private static final int NUMPAD_PORT = 5;
 
     private final DriveStick driveStick;
