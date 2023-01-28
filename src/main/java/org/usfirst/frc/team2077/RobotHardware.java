@@ -4,9 +4,8 @@ import org.usfirst.frc.team2077.common.*;
 
 import java.util.EnumMap;
 /*
-Before implementing any inherited methods (methods with the "abstract" modifier in HardwareRequirements)
 You should replace "DRIVE_MODULE" with the type of modules your chassis uses.
-Ex. SparkNeoDriveModule for mecanums, SwerveModule for swerve, etc.
+Ex. SparkNeoDriveModule, SwerveModule, etc.
 and replace "CHASSIS_TYPE" with the type of chassis you're using MecanumChassis, SwerveChassis, etc.
 */
 
