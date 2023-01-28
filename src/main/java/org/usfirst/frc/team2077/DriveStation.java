@@ -7,8 +7,10 @@ package org.usfirst.frc.team2077;
 
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj2.command.button.*;
-import org.usfirst.frc.team2077.common.*;
 import org.usfirst.frc.team2077.common.command.*;
+import org.usfirst.frc.team2077.common.control.DriveJoystick;
+import org.usfirst.frc.team2077.common.control.DriveStick;
+import org.usfirst.frc.team2077.common.control.DriveXboxController;
 
 /**
  * This class is intended to be the center point of defining actions that can be utilized during teleop segments of
