@@ -27,13 +27,13 @@ public class RobotHardware implements HardwareRequirements<DRIVE_MODULE, CHASSIS
     }
 
     private DRIVE_MODULE makeWheel(WheelPosition position) {
-        switch(position) {
+        return switch(position) {
             case FRONT_LEFT -> new DRIVE_MODULE();
             case FRONT_RIGHT -> new DRIVE_MODULE();
             case BACK_LEFT -> new DRIVE_MODULE();
             case BACK_RIGHT -> new DRIVE_MODULE();
-        }
-        throw new IllegalArgumentException("Unsupported Wheel position: " + position);
+            default -> throw new IllegalArgumentException("Unsupported Wheel position: " + position);
+        };
     }
 
     @Override public CHASSIS_TYPE getChassis() {
