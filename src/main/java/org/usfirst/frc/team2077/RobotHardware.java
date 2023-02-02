@@ -2,17 +2,17 @@ package org.usfirst.frc.team2077;
 
 import org.usfirst.frc.team2077.common.*;
 
-import java.util.EnumMap;
+import java.util.*;
 /*
-You should replace "DRIVE_MODULE" with the type of modules your chassis uses.
+You should replace "SparkNeoDriveModule" with the type of modules your chassis uses.
 Ex. SparkNeoDriveModule, SwerveModule, etc.
-and replace "CHASSIS_TYPE" with the type of chassis you're using MecanumChassis, SwerveChassis, etc.
+and replace "MecanumChassis" with the type of chassis you're using MecanumChassis, SwerveChassis, etc.
 */
 
 /**
  * This is intended to be a spot for the definition and retrieval of all robot hardware.
  * */
-public class RobotHardware implements HardwareRequirements<DRIVE_MODULE, CHASSIS_TYPE> {
+public class RobotHardware extends HardwareRequirements<DRIVE_MODULE, CHASSIS_TYPE> {
     private final CHASSIS_TYPE chassis;
     private final Map<WheelPosition, DRIVE_MODULE> wheels = new EnumMap<>(WheelPosition.class);
 
@@ -23,7 +23,7 @@ public class RobotHardware implements HardwareRequirements<DRIVE_MODULE, CHASSIS
             wheels.put(p, makeWheel(p));
         }
 
-        chassis = new ChassisType(this);
+        chassis = new CHASSIS_TYPE(this);
     }
 
     private DRIVE_MODULE makeWheel(WheelPosition position) {
