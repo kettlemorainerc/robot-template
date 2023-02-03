@@ -4,9 +4,9 @@ import org.usfirst.frc.team2077.common.*;
 
 import java.util.*;
 /*
-You should replace "SparkNeoDriveModule" with the type of modules your chassis uses.
+You should replace "DRIVE_MODULE" with the type of modules your chassis uses.
 Ex. SparkNeoDriveModule, SwerveModule, etc.
-and replace "MecanumChassis" with the type of chassis you're using MecanumChassis, SwerveChassis, etc.
+and replace "CHASSIS_TYPE" with the type of chassis you're using MecanumChassis, SwerveChassis, etc.
 */
 
 /**
