@@ -28,11 +28,10 @@ public class RobotHardware extends HardwareRequirements<DRIVE_MODULE, CHASSIS_TY
 
     private DRIVE_MODULE makeWheel(WheelPosition position) {
         return switch(position) {
-            case FRONT_LEFT -> new DRIVE_MODULE();
-            case FRONT_RIGHT -> new DRIVE_MODULE();
-            case BACK_LEFT -> new DRIVE_MODULE();
-            case BACK_RIGHT -> new DRIVE_MODULE();
-            default -> throw new IllegalArgumentException("Unsupported Wheel position: " + position);
+            case FRONT_LEFT -> new DRIVE_MODULE(position);
+            case FRONT_RIGHT -> new DRIVE_MODULE(position);
+            case BACK_LEFT -> new DRIVE_MODULE(position);
+            case BACK_RIGHT -> new DRIVE_MODULE(position);
         };
     }
 
