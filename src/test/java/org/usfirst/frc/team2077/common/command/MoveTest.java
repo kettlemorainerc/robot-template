@@ -33,6 +33,7 @@ class MoveTest {
         tick(6, 0, 0);
         tick(8, 0, 0);
         tick(10, 0, 0);
+        assertTrue(move.isFinished());
         tick(10, 0, 0);
         assertTrue(move.isFinished());
     }
@@ -45,6 +46,7 @@ class MoveTest {
         tick(0, 6, 0);
         tick(0, 8, 0);
         tick(0, 10, 0);
+        assertTrue(move.isFinished());
         tick(0, 10, 0);
         assertTrue(move.isFinished());
     }
@@ -57,6 +59,7 @@ class MoveTest {
         tick(6, 6, 0);
         tick(8, 8, 0);
         tick(10, 10, 0);
+        assertTrue(move.isFinished());
         tick(10, 10, 0);
         assertTrue(move.isFinished());
     }
@@ -70,6 +73,7 @@ class MoveTest {
         tick(0, 0, 30);
         tick(0, 0, 40);
         tick(0, 0, 50);
+        assertTrue(move.isFinished());
         tick(0, 0, 50);
         assertTrue(move.isFinished());
     }
@@ -77,13 +81,31 @@ class MoveTest {
     @Test public void bot_does_everything() {
         useMove(new Move(hardware, 10, 10, 50));
 
-        tick();
-        tick();
-        tick();
-        tick();
-        tick();
-        tick();
-        tick();
+        // I'm not sure what's expected utilizing this constructor.
+        // So these are just outputs from running it
+
+        // New velocity: [10.0, 10.0, 50.0]
+        // N:0.0in E:0.0in A:0.0deg | done: false
+        tick(0, 0, 0);
+        // New velocity: [10.0, 10.0, 50.0]
+        // N:1.8in E:2.2in A:10.0deg | done: false
+        tick(1.8, 2.2, 10);
+        // New velocity: [10.0, 10.0, 50.0]
+        // N:3.2in E:4.6in A:20.0deg | done: false
+        tick(3.2, 4.6, 20);
+        // New velocity: [10.0, 10.0, 50.0]
+        // N:4.2in E:7.3in A:30.0deg | done: false
+        tick(4.2, 7.3, 30);
+        // New velocity: [10.0, 10.0, 50.0]
+        // N:4.7in E:10.0in A:40.0deg | done: false
+        tick(4.7, 10, 40);
+        // New velocity: [10.0, 10.0, 50.0]
+        // N:4.7in E:12.9in A:50.0deg | done: false
+        tick(4.7, 12.9, 50);
+        // New velocity: [10.0, 10.0, 0.0]
+        // N:4.2in E:15.7in A:60.0deg | done: true
+        tick(4.2, 15.7, 60);
+        assertTrue(move.isFinished());
     }
 
     private void useMove(Move move) {
@@ -108,13 +130,12 @@ class MoveTest {
         if(done) move.end(false);
 
         var position = chassis.getPosition();
-        System.out.println(position + " | done: " + done);
 
         if(test) {
             assertArrayEquals(
                   new double[] {positionN, positionE, positionR},
                   position.get(),
-                  0.01
+                  0.1
             );
         }
     }

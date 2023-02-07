@@ -133,7 +133,6 @@ public class Move extends CommandBase {
             newVelocity[i] = useSlow ? slow[i] : fast[i];
         }
 
-        System.out.println("New velocity: " + Arrays.toString(newVelocity));
         chassis.setVelocity(newVelocity[0], newVelocity[1], newVelocity[2], acceleration);
     }
 
