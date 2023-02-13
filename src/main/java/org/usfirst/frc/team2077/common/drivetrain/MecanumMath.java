@@ -2,11 +2,9 @@ package org.usfirst.frc.team2077.common.drivetrain;
 
 import org.usfirst.frc.team2077.common.VelocityDirection;
 import org.usfirst.frc.team2077.common.WheelPosition;
-import org.usfirst.frc.team2077.common.math.EnumMatrix;
-import org.usfirst.frc.team2077.common.math.Point;
+import org.usfirst.frc.team2077.common.math.*;
 
-import java.util.EnumMap;
-import java.util.Map;
+import java.util.*;
 
 import static org.usfirst.frc.team2077.common.VelocityDirection.*;
 

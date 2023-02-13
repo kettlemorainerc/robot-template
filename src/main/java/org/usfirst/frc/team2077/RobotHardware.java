@@ -1,62 +1,45 @@
 package org.usfirst.frc.team2077;
 
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.revrobotics.CANSparkMax;
-import edu.wpi.first.wpilibj.PWM;
-import edu.wpi.first.wpilibj.PneumaticsModuleType;
-import edu.wpi.first.wpilibj.Relay;
-import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.motorcontrol.Spark;
-import edu.wpi.first.wpilibj.motorcontrol.Talon;
-import org.usfirst.frc.team2077.common.HardwareRequirements;
-import org.usfirst.frc.team2077.common.WheelPosition;
-import org.usfirst.frc.team2077.common.subsystem.CANLineSubsystem;
-import org.usfirst.frc.team2077.drivetrain.SwerveChassis;
-import org.usfirst.frc.team2077.subsystem.SwerveMotor;
+import org.usfirst.frc.team2077.common.*;
 
-public class RobotHardware extends HardwareRequirements<SwerveMotor, SwerveChassis> {
-    private final SwerveChassis chassis;
+import java.util.*;
+/*
+You should replace "DRIVE_MODULE" with the type of modules your chassis uses.
+Ex. SparkNeoDriveModule, SwerveModule, etc.
+and replace "CHASSIS_TYPE" with the type of chassis you're using MecanumChassis, SwerveChassis, etc.
+*/
 
-    private static RobotHardware instance;
-
-    public static RobotHardware getInstance() {
-        if(instance == null) instance = new RobotHardware();
-        return instance;
-    }
-
-    public final TalonSRX piston = new TalonSRX(9);
-
-    public final Spark arm = new Spark(9);
-    public final TalonSRX claw = new TalonSRX(10);
-    public final SwerveMotor northEast = new SwerveMotor(SwerveMotor.MotorPosition.FRONT_RIGHT);
-    public final SwerveMotor northWest = new SwerveMotor(SwerveMotor.MotorPosition.FRONT_LEFT);
-    public final SwerveMotor southEast = new SwerveMotor(SwerveMotor.MotorPosition.BACK_RIGHT);
-    public final SwerveMotor southWest = new SwerveMotor(SwerveMotor.MotorPosition.BACK_LEFT);
+/**
+ * This is intended to be a spot for the definition and retrieval of all robot hardware.
+ * */
+public class RobotHardware extends HardwareRequirements<DRIVE_MODULE, CHASSIS_TYPE> {
+    private final CHASSIS_TYPE chassis;
+    private final Map<WheelPosition, DRIVE_MODULE> wheels = new EnumMap<>(WheelPosition.class);
 
     public RobotHardware() {
+        super();
 
-        instance = this;
+        for(WheelPosition p : WheelPosition.values()) {
+            wheels.put(p, makeWheel(p));
+        }
 
-        chassis = new SwerveChassis(this); // new MecanumChassis(this);
-
+        chassis = new CHASSIS_TYPE(this);
     }
 
-    @Override public SwerveChassis getChassis() {
+    private DRIVE_MODULE makeWheel(WheelPosition position) {
+        return switch(position) {
+            case FRONT_LEFT -> new DRIVE_MODULE(position);
+            case FRONT_RIGHT -> new DRIVE_MODULE(position);
+            case BACK_LEFT -> new DRIVE_MODULE(position);
+            case BACK_RIGHT -> new DRIVE_MODULE(position);
+        };
+    }
+
+    @Override public CHASSIS_TYPE getChassis() {
         return chassis;
     }
 
-    @Override public SwerveMotor getWheel(WheelPosition position) {
-        switch(position) {
-            case FRONT_RIGHT:
-                return northEast;
-            case BACK_RIGHT:
-                return southEast;
-            case BACK_LEFT:
-                return southWest;
-            case FRONT_LEFT:
-                return northWest;
-        }
-
-        return null;
+    @Override public DRIVE_MODULE getWheel(WheelPosition pos) {
+        return wheels.get(pos);
     }
 }
