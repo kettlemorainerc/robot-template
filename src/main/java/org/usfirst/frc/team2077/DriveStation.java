@@ -7,6 +7,9 @@ package org.usfirst.frc.team2077;
 
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj2.command.button.*;
+import org.usfirst.frc.team2077.command.ExtendArm;
+import org.usfirst.frc.team2077.command.CloseClaw;
+import org.usfirst.frc.team2077.command.RaiseArm;
 import org.usfirst.frc.team2077.common.command.*;
 import org.usfirst.frc.team2077.common.control.DriveJoystick;
 import org.usfirst.frc.team2077.common.control.DriveStick;
@@ -63,6 +66,24 @@ public class DriveStation {
 
     /** Bind technical driver button commands here */
     private void bindTechnicalControl(RobotHardware hardware, Joystick secondary) {
+        JoystickButton pistonUp = new JoystickButton(secondary, 12);
+        JoystickButton pistonDown = new JoystickButton(secondary, 16);
+
+        JoystickButton openClaw = new JoystickButton(secondary, 11);
+        JoystickButton closeClaw = new JoystickButton(secondary, 15);
+
+        JoystickButton extendArm = new JoystickButton(secondary, 10);
+        JoystickButton retractArm = new JoystickButton(secondary, 14);
+
+
+        new RaiseArm(hardware, RaiseArm.PistonDirection.UP).bind(pistonUp);
+        new RaiseArm(hardware, RaiseArm.PistonDirection.DOWN).bind(pistonDown);
+
+        new CloseClaw(hardware, CloseClaw.ClawDirection.OPEN).bind(openClaw);
+        new CloseClaw(hardware, CloseClaw.ClawDirection.CLOSE).bind(closeClaw);
+
+        new ExtendArm(hardware, ExtendArm.ArmDirection.EXTEND).bind(extendArm);
+        new ExtendArm(hardware, ExtendArm.ArmDirection.RETRACT).bind(retractArm);
     }
 
     /** Normal (silver/brighter) joystick that supports rotation */
