@@ -1,7 +1,6 @@
 package org.usfirst.frc.team2077.common.command;
 
 import org.usfirst.frc.team2077.common.WheelPosition;
-import org.usfirst.frc.team2077.common.drivetrain.DriveModuleIF;
 
 public class TestDriveModule implements DriveModuleIF {
     private final double maxSpeed;
