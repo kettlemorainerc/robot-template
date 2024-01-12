@@ -1,12 +1,13 @@
 package org.usfirst.frc.team2077.common.command;
 
+import edu.wpi.first.wpilibj2.command.Subsystem;
 import org.junit.jupiter.api.*;
+import org.usfirst.frc.team2077.common.WheelPosition;
 import org.usfirst.frc.team2077.common.*;
 
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.usfirst.frc.team2077.common.VelocityDirection.*;
 import static org.usfirst.frc.team2077.common.WheelPosition.*;
 
 class MoveTest {
@@ -153,6 +154,8 @@ class MoveTest {
         private final TestChassis chassis;
         
         MoveTestHardware() {
+            super(new Subsystem() {}, new Subsystem() {}, null, null);
+
             this.modules = Map.of(
                   FRONT_LEFT, makeWheel(FRONT_LEFT),
                   FRONT_RIGHT, makeWheel(FRONT_RIGHT),

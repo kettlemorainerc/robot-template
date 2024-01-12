@@ -1,5 +1,6 @@
-package org.usfirst.frc.team2077.common.drivetrain;
+package org.usfirst.frc.team2077.drivetrain;
 
+import org.usfirst.frc.team2077.common.VelocityDirection;
 import org.usfirst.frc.team2077.common.WheelPosition;
 
 import java.util.*;

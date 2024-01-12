@@ -1,7 +1,8 @@
 package org.usfirst.frc.team2077.common.command;
 
+import org.usfirst.frc.team2077.common.WheelPosition;
 import org.usfirst.frc.team2077.common.*;
-import org.usfirst.frc.team2077.common.drivetrain.*;
+import org.usfirst.frc.team2077.drivetrain.ChassisKinematics;
 
 import java.util.*;
 

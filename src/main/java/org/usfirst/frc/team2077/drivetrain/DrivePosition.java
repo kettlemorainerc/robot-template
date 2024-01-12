@@ -76,7 +76,7 @@ public enum DrivePosition implements org.usfirst.frc.team2077.common.drivetrain.
         return D;
     }
 
-    @Override public WheelPosition position() {
+    @Override public WheelPosition getWheelPosition() {
         return wheelPosition;
     }
 
