@@ -7,6 +7,10 @@ plugins {
 targetCompatibility = JavaVersion.VERSION_17
 sourceCompatibility = JavaVersion.VERSION_17
 
+repositories {
+    mavenLocal()
+}
+
 dependencies {
     compileOnly(wpi.java.deps.wpilib())
     compileOnly(wpi.java.vendor.java())
