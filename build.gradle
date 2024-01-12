@@ -8,7 +8,12 @@ plugins {
 
 def javaVersion = JavaVersion.VERSION_17
 java {
-    sourceCompatibility = targetCompatibility = javaVersion
+    sourceCompatibility = javaVersion
+    targetCompatibility = javaVersion
+}
+
+repositories {
+    mavenLocal()
 }
 
 def ROBOT_MAIN_CLASS = "frc.robot.Main"
@@ -75,7 +80,7 @@ dependencies {
     nativeRelease wpi.java.vendor.jniRelease(wpi.platforms.desktop)
     simulationRelease wpi.sim.enableRelease()
 
-    testImplementation platform("org.junit:junit-bom:5.8.2")
+    testImplementation platform("org.junit:junit-bom:5.10.1")
     testImplementation "org.junit.jupiter:junit-jupiter-api"
     testImplementation "org.junit.jupiter:junit-jupiter-params"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine"
