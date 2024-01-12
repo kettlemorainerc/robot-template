@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2077.common.command;
 
 import org.usfirst.frc.team2077.common.*;
+import org.usfirst.frc.team2077.common.drivetrain.AbstractChassis;
 import org.usfirst.frc.team2077.common.math.*;
 
 import java.util.*;
@@ -27,7 +28,7 @@ public class TestChassis extends AbstractChassis<TestDriveModule> {
 
     private final TestMath math;
 
-    private static Map<WheelPosition, TestDriveModule> makeModules(
+    private static EnumMap<WheelPosition, TestDriveModule> makeModules(
           HardwareRequirements<TestDriveModule, ?> hardware
     ) {
         var map = new EnumMap<WheelPosition, TestDriveModule>(WheelPosition.class);

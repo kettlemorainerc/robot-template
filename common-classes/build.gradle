@@ -1,10 +1,13 @@
 plugins {
-    id "java"
+    id "java-library"
     id "edu.wpi.first.GradleRIO"
     id "idea"
 }
 
+targetCompatibility = JavaVersion.VERSION_17
+sourceCompatibility = JavaVersion.VERSION_17
+
 dependencies {
-    implementation wpi.java.deps.wpilib()
-    implementation wpi.java.vendor.java()
+    compileOnly(wpi.java.deps.wpilib())
+    compileOnly(wpi.java.vendor.java())
 }

@@ -1,6 +1,9 @@
 package org.usfirst.frc.team2077;
 
 import org.usfirst.frc.team2077.common.*;
+import org.usfirst.frc.team2077.common.drivetrain.MecanumChassis;
+import org.usfirst.frc.team2077.common.drivetrain.SparkNeoDriveModule;
+import org.usfirst.frc.team2077.drivetrain.DrivePosition;
 
 import java.util.*;
 /*
@@ -12,9 +15,9 @@ and replace "CHASSIS_TYPE" with the type of chassis you're using MecanumChassis,
 /**
  * This is intended to be a spot for the definition and retrieval of all robot hardware.
  * */
-public class RobotHardware extends HardwareRequirements<DRIVE_MODULE, CHASSIS_TYPE> {
-    private final CHASSIS_TYPE chassis;
-    private final Map<WheelPosition, DRIVE_MODULE> wheels = new EnumMap<>(WheelPosition.class);
+public class RobotHardware extends HardwareRequirements<SparkNeoDriveModule, MecanumChassis> {
+    private final MecanumChassis chassis;
+    private final Map<WheelPosition, SparkNeoDriveModule> wheels = new EnumMap<>(WheelPosition.class);
 
     public RobotHardware() {
         super();
@@ -23,23 +26,20 @@ public class RobotHardware extends HardwareRequirements<DRIVE_MODULE, CHASSIS_TY
             wheels.put(p, makeWheel(p));
         }
 
-        chassis = new CHASSIS_TYPE(this);
+        chassis = new MecanumChassis(this);
     }
 
-    private DRIVE_MODULE makeWheel(WheelPosition position) {
-        return switch(position) {
-            case FRONT_LEFT -> new DRIVE_MODULE(position);
-            case FRONT_RIGHT -> new DRIVE_MODULE(position);
-            case BACK_LEFT -> new DRIVE_MODULE(position);
-            case BACK_RIGHT -> new DRIVE_MODULE(position);
-        };
+    private SparkNeoDriveModule makeWheel(WheelPosition position) {
+        var target = DrivePosition.forWheelPosition(position);
+
+        return new SparkNeoDriveModule(target);
     }
 
-    @Override public CHASSIS_TYPE getChassis() {
+    @Override public MecanumChassis getChassis() {
         return chassis;
     }
 
-    @Override public DRIVE_MODULE getWheel(WheelPosition pos) {
+    @Override public SparkNeoDriveModule getWheel(WheelPosition pos) {
         return wheels.get(pos);
     }
 }
